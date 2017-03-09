@@ -13,6 +13,10 @@
     "type": "git",
     "url": "https://github.com/rainyday/node-gulp-cleanup-dest.git"
   },
+  "keywords": [
+    "gulpplugin",
+    "cleanup"
+  ],
   "license": "MIT",
   "dependencies": {
     "debug": "^2.6.1",
@@ -27,10 +31,12 @@
     "@types/del": "^2.2.32",
     "@types/gulp-util": "^3.0.30",
     "@types/mocha": "^2.2.39",
+    "@types/sinon": "^1.16.35",
     "@types/through2": "^2.0.32",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "mocha": "^3.2.0",
+    "sinon": "^1.17.7",
     "typescript": "^2.2.1"
   }
 }

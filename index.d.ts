@@ -1,5 +1,6 @@
 /// <reference types="node" />
-declare function cleanup(options: cleanup.Options): NodeJS.ReadWriteStream;
+import * as stream from 'stream';
+declare function cleanup(options: cleanup.Options): stream.Transform;
 declare namespace cleanup {
     interface Options {
         dest: string;

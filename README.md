@@ -10,7 +10,7 @@ This module will delete all files that do not match those in current pipeline in
 ## Usage
 
 ```javascript
-const cleanup = require('cleanup');
+const cleanup = require('gulp-cleanup-dest');
 gulp.task(function ts() {
     return gulp.src('src/**/*.ts')
         .pipe(cleanup({

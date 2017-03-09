@@ -2,12 +2,13 @@ import * as through from 'through2';
 import * as setupDebug from 'debug';
 import * as del from 'del';
 import * as path from 'path';
-import {PluginError, log} from 'gulp-util';
+import * as stream from 'stream';
+import { PluginError, log } from 'gulp-util';
 
 
-const debug = setupDebug('gulp-cleanup');
+const debug = setupDebug('gulp-cleanup-dest');
 
-function cleanup(options: cleanup.Options): NodeJS.ReadWriteStream {
+function cleanup(options: cleanup.Options): stream.Transform {
     let files: string[] = [];
 
     if (!options.dest) {
@@ -17,8 +18,9 @@ function cleanup(options: cleanup.Options): NodeJS.ReadWriteStream {
         throw new PluginError('`ext` option should be in the form of ".ext"');
     }
 
-    return through.obj(function(file, enc, cb) {
+    return through.obj(function (file, enc, cb) {
         let filePath: string;
+
         if (file.isDirectory()) { cb(null, file); }
         if (options.ext) {
             filePath = path.join(options.dest, file.relative.replace(/\.\w+$/i, options.ext));
@@ -27,8 +29,9 @@ function cleanup(options: cleanup.Options): NodeJS.ReadWriteStream {
         }
         files.push(filePath);
         cb(null, file);
-    }, function(cb) {
+    }, function (cb) {
         let delPath: string;
+
         if (options.ext) {
             delPath = path.join(options.dest, '**', `*${options.ext}`);
         } else {
@@ -37,7 +40,15 @@ function cleanup(options: cleanup.Options): NodeJS.ReadWriteStream {
         debug(delPath, files);
         del(delPath, {
             ignore: files
-        }).then(() => cb()).catch((e: Error) => log(e.message));
+        })
+        .then(() => {
+            this.emit('cleanup-dest:done');
+            cb();
+        })
+        .catch((e: Error) => {
+            log(e.message);
+            cb();
+        });
     });
 }
 
