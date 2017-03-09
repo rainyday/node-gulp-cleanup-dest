@@ -1,15 +1,19 @@
 {
-  "name": "gulp-cleanup",
+  "name": "gulp-cleanup-dest",
   "version": "0.1.0",
-  "description": "Cleans up unused files in dest.",
+  "description": "Cleans up unused files in dest",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
     "test": "mocha",
-    "prepublish": "tsc -p ."
+    "prepublish": "tsc -d -p ."
   },
   "author": "Rachel Hutchison",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rainyday/node-gulp-cleanup-dest.git"
+  },
+  "license": "MIT",
   "dependencies": {
     "debug": "^2.6.1",
     "del": "^2.2.2",
