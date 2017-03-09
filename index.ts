@@ -2,15 +2,15 @@ import * as through from 'through2';
 import * as setupDebug from 'debug';
 import * as del from 'del';
 import * as path from 'path';
-import {PluginError} from 'gulp-util';
+import {PluginError, log} from 'gulp-util';
+
 
 const debug = setupDebug('gulp-cleanup');
 
-function cleanup(options: CleanupOptions) {
-
+function cleanup(options: cleanup.Options): NodeJS.ReadWriteStream {
     let files: string[] = [];
 
-    if (typeof options.dest === 'undefined') {
+    if (!options.dest) {
         throw new PluginError('Missing `dest` property in options');
     }
     if (options.ext && !options.ext.match(/\.\w+/i)) {
@@ -37,13 +37,15 @@ function cleanup(options: CleanupOptions) {
         debug(delPath, files);
         del(delPath, {
             ignore: files
-        }).then(() => cb());
+        }).then(() => cb()).catch((e: Error) => log(e.message));
     });
 }
 
-interface CleanupOptions {
-    dest: string;
-    ext?: string;
+namespace cleanup {
+    export interface Options {
+        dest: string;
+        ext?: string;
+    }
 }
 
 export = cleanup;
