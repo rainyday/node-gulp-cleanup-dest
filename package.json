@@ -1,6 +1,6 @@
 {
   "name": "gulp-cleanup-dest",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Cleans up unused files in dest",
   "main": "index.js",
   "types": "index.d.ts",
