@@ -25,19 +25,16 @@ function cleanup(options: CleanupOptions) {
         } else {
             filePath = path.join(options.dest, file.relative);
         }
-        if (process.platform === 'win32') {
-            filePath = filePath.replace(/\\/g, '/');
-        }
         files.push(filePath);
         cb(null, file);
     }, function(cb) {
-        debug(files);
         let delPath: string;
         if (options.ext) {
             delPath = path.join(options.dest, '**', `*${options.ext}`);
         } else {
             delPath = path.join(options.dest, '**');
         }
+        debug(delPath, files);
         del(delPath, {
             ignore: files
         }).then(() => cb());
