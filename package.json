@@ -1,0 +1,24 @@
+{
+  "name": "gulp-cleanup",
+  "version": "0.1.0",
+  "description": "Cleans up unused files in dest.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rachel Hutchison",
+  "license": "ISC",
+  "dependencies": {
+    "debug": "^2.6.1",
+    "del": "^2.2.2",
+    "gulp-util": "^3.0.8",
+    "through2": "^2.0.3"
+  },
+  "devDependencies": {
+    "@types/debug": "0.0.29",
+    "@types/del": "^2.2.32",
+    "@types/gulp-util": "^3.0.30",
+    "@types/through2": "^2.0.32",
+    "typescript": "^2.2.1"
+  }
+}
