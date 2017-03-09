@@ -14,7 +14,7 @@ function cleanup(options: cleanup.Options): stream.Transform {
     if (!options.dest) {
         throw new PluginError('Missing `dest` property in options');
     }
-    if (options.ext && !options.ext.match(/\.\w+/i)) {
+    if (options.ext && !options.ext.match(/[\w{},.]+/i)) {
         throw new PluginError('`ext` option should be in the form of ".ext"');
     }
 
