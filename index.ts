@@ -42,7 +42,7 @@ function cleanup(options: cleanup.Options): stream.Transform {
             ignore: files
         })
         .then(() => {
-            this.emit('cleanup-dest:done');
+            this.emit('flush');
             cb();
         })
         .catch((e: Error) => {
